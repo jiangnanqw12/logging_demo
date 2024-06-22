@@ -24,3 +24,6 @@ This Python library provides a customizable logging setup that can be integrated
 ## Usage
 
 Import and instantiate `MyLogger` to integrate logging into your Python application. Adjust the initialization parameters as needed to configure the logging behavior.
+
+## todo
+add setup.py 
