@@ -1,7 +1,7 @@
-# File: logging_lib.py
+
 import logging
 
-class MyLogger:
+class EstrellioLogger:
     def __init__(self, log_to_file=True, show_plots=True, img_to_file=False, uniform_logging_level=True, desired_level=logging.DEBUG,logger_level=logging.DEBUG,ch_level=logging.INFO,fh_level=logging.DEBUG,log_file_name="logfile.log"):
         """
         Initialize the logger with specified settings.
@@ -27,7 +27,7 @@ class MyLogger:
 
     def setup_logger(self):
         """Setup and return a configured logger."""
-        logger = logging.getLogger('my_custom_logger')
+        logger = logging.getLogger('estrellio_logger')
         logger.setLevel(self.desired_level if self.uniform_logging_level else self.logger_level)
 
         ch = logging.StreamHandler()
@@ -57,10 +57,10 @@ class MyLogger:
         getattr(self.logger, level.lower(), self.logger.error)(message)
 def main():
     # Example usage in another file
-    from logging_lib import MyLogger
+    from estrellio_logging_lib import EstrellioLogger
     import matplotlib.pyplot as plt
-    logger = MyLogger(log_to_file=True, show_plots=True, img_to_file=False, uniform_logging_level=True, desired_level=logging.DEBUG,logger_level=logging.DEBUG,ch_level=logging.INFO,fh_level=logging.DEBUG,log_file_name="logfile.log")
-    logger = MyLogger()
+    logger = EstrellioLogger(log_to_file=True, show_plots=True, img_to_file=False, uniform_logging_level=True, desired_level=logging.DEBUG,logger_level=logging.DEBUG,ch_level=logging.INFO,fh_level=logging.DEBUG,log_file_name="logfile.log")
+    logger = EstrellioLogger()
     logger.log_message('info', 'This is an info message.')
     if logger.show_plots or logger.img_to_file:
         data=[1, 2, 3, 4]
