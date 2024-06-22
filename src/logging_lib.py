@@ -1,6 +1,6 @@
 # File: logging_lib.py
 import logging
-import matplotlib.pyplot as plt
+
 
 class MyLogger:
     def __init__(self, log_to_file=True, show_plots=True, img_to_file=False, uniform_logging_level=True, desired_level=logging.DEBUG):
@@ -39,18 +39,22 @@ class MyLogger:
         elif level.lower() == 'error':
             self.logger.error(message)
 
-    def plot_data(self, data, plot_title='Test Plot'):
-        plt.figure()
-        plt.plot(data)
-        plt.title(plot_title)
-        if self.show_plots:
-            plt.show()
-        if self.img_to_file:
-            plt.savefig('plot.png')
 
-# Example usage in another file
-from my_logging_lib import MyLogger
-
-logger = MyLogger()
-logger.log_message('info', 'This is an info message.')
-logger.plot_data([1, 2, 3, 4], 'Sample Plot')
+def main():
+    # Example usage in another file
+    from logging_lib import MyLogger
+    import matplotlib.pyplot as plt
+    logger = MyLogger()
+    logger.log_message('info', 'This is an info message.')
+    
+    data=[1, 2, 3, 4]
+    plot_title='Sample Plot'
+    plt.figure()
+    plt.plot(data)
+    plt.title(plot_title)
+    if logger.show_plots:
+        plt.show()
+    if logger.img_to_file:
+        plt.savefig('plot.png')
+if __name__=='__main__':
+    main()
