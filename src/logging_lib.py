@@ -60,6 +60,7 @@ def main():
     from logging_lib import MyLogger
     import matplotlib.pyplot as plt
     logger = MyLogger(log_to_file=True, show_plots=True, img_to_file=False, uniform_logging_level=True, desired_level=logging.DEBUG,logger_level=logging.DEBUG,ch_level=logging.INFO,fh_level=logging.DEBUG,log_file_name="logfile.log")
+    logger = MyLogger()
     logger.log_message('info', 'This is an info message.')
     if logger.show_plots or logger.img_to_file:
         data=[1, 2, 3, 4]
