@@ -1,9 +1,18 @@
 # File: logging_lib.py
 import logging
 
-
 class MyLogger:
     def __init__(self, log_to_file=True, show_plots=True, img_to_file=False, uniform_logging_level=True, desired_level=logging.DEBUG):
+        """
+        Initialize the logger with specified settings.
+
+        Parameters:
+        - log_to_file (bool): Enables logging to a file.
+        - show_plots (bool): This flag is reserved for future plotting functionalities.
+        - img_to_file (bool): This flag is reserved for future functionalities where images might be saved.
+        - uniform_logging_level (bool): When True, applies a uniform logging level across all handlers.
+        - desired_level (logging level): The logging level applied if uniform_logging_level is True.
+        """
         self.log_to_file = log_to_file
         self.show_plots = show_plots
         self.img_to_file = img_to_file
@@ -12,8 +21,9 @@ class MyLogger:
         self.logger = self.setup_logger()
 
     def setup_logger(self):
+        """Setup and return a configured logger."""
         logger = logging.getLogger('my_custom_logger')
-        logger.setLevel(logging.DEBUG if self.uniform_logging_level else logging.INFO)
+        logger.setLevel(self.desired_level if self.uniform_logging_level else logging.DEBUG)
 
         ch = logging.StreamHandler()
         ch.setLevel(self.desired_level if self.uniform_logging_level else logging.INFO)
@@ -28,18 +38,18 @@ class MyLogger:
             logger.addHandler(fh)
 
         return logger
-
+    # def log_message(self, level, message):
+    #     if level.lower() == 'info':
+    #         self.logger.info(message)
+    #     elif level.lower() == 'debug':
+    #         self.logger.debug(message)
+    #     elif level.lower() == 'warning':
+    #         self.logger.warning(message)
+    #     elif level.lower() == 'error':
+    #         self.logger.error(message)
     def log_message(self, level, message):
-        if level.lower() == 'info':
-            self.logger.info(message)
-        elif level.lower() == 'debug':
-            self.logger.debug(message)
-        elif level.lower() == 'warning':
-            self.logger.warning(message)
-        elif level.lower() == 'error':
-            self.logger.error(message)
-
-
+        """Log a message at the given level."""
+        getattr(self.logger, level.lower(), self.logger.error)(message)
 def main():
     # Example usage in another file
     from logging_lib import MyLogger
@@ -56,5 +66,5 @@ def main():
         plt.show()
     if logger.img_to_file:
         plt.savefig('plot.png')
-if __name__=='__main__':
+if __name__ == '__main__':
     main()
