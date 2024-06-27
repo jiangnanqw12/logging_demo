@@ -120,15 +120,15 @@ def main():
     logger.set_show_plots(True)
     logger.log_message('info', 'This is an info message.')
     import matplotlib.pyplot as plt
-    if logger.show_plots or logger.img_to_file:
+    if show_plots or img_to_file:
         data=[1, 2, 3, 4]
         plot_title='Sample Plot'
         plt.figure()
         plt.plot(data)
         plt.title(plot_title)
-    if logger.show_plots:
+    if show_plots:
         plt.show()
-    if logger.img_to_file:
+    if img_to_file:
         plt.savefig('plot.png')
 if __name__ == '__main__':
     main()
