@@ -114,8 +114,8 @@ def main():
     logger = EstrellioLogger()
     global show_plots
     global img_to_file
-    show_plots=logger.get_show_plots
-    img_to_file=logger.get_img_to_file
+    show_plots=logger.get_show_plots()
+    img_to_file=logger.get_img_to_file()
     logger.set_log_to_file(True)
     logger.set_show_plots(True)
     logger.log_message('info', 'This is an info message.')
