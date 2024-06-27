@@ -110,12 +110,16 @@ class EstrellioLogger:
 def main():
     # Example usage in another file
     from estrellio_logging_lib import EstrellioLogger
-    import matplotlib.pyplot as plt
     logger = EstrellioLogger(log_to_file=True, show_plots=True, img_to_file=False, uniform_logging_level=True, desired_level=logging.DEBUG,logger_level=logging.DEBUG,ch_level=logging.INFO,fh_level=logging.DEBUG,log_file_name="logfile.log")
     logger = EstrellioLogger()
+    global show_plots
+    global img_to_file
+    show_plots=logger.get_show_plots
+    img_to_file=logger.get_img_to_file
     logger.set_log_to_file(True)
     logger.set_show_plots(True)
     logger.log_message('info', 'This is an info message.')
+    import matplotlib.pyplot as plt
     if logger.show_plots or logger.img_to_file:
         data=[1, 2, 3, 4]
         plot_title='Sample Plot'
