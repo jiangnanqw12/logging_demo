@@ -44,10 +44,10 @@ class EstrellioLogger:
 
         return logger
     # def log_message(self, level, message):
-    #     if level.lower() == 'info':
-    #         self.logger.info(message)
-    #     elif level.lower() == 'debug':
+    #     if level.lower() == 'debug':
     #         self.logger.debug(message)
+    #     elif level.lower() == 'info':
+    #         self.logger.info(message)
     #     elif level.lower() == 'warning':
     #         self.logger.warning(message)
     #     elif level.lower() == 'error':
@@ -55,6 +55,7 @@ class EstrellioLogger:
     def log_message(self, level, message):
         """Log a message at the given level."""
         getattr(self.logger, level.lower(), self.logger.error)(message)
+        'todo, what is getattr'
 def main():
     # Example usage in another file
     from estrellio_logging_lib import EstrellioLogger
