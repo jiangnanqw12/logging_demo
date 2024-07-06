@@ -1,7 +1,8 @@
 import logging
-
+import os
+from datetime import datetime
 class EstrellioLogger:
-    def __init__(self, log_to_file=True, show_plots=True, img_to_file=False, uniform_logging_level=True, desired_level=logging.DEBUG, logger_level=logging.DEBUG, ch_level=logging.INFO, fh_level=logging.DEBUG, log_file_name="logfile.log"):
+    def __init__(self, log_to_file=True, show_plots=True, img_to_file=False, uniform_logging_level=True, desired_level=logging.DEBUG, logger_level=logging.DEBUG, ch_level=logging.INFO, fh_level=logging.DEBUG):
         """
         Initialize the logger with specified settings.
 
@@ -21,7 +22,12 @@ class EstrellioLogger:
         self._logger_level = logger_level
         self._ch_level = ch_level
         self._fh_level = fh_level
-        self._log_file_name = log_file_name
+        timestamp = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
+        self._log_file_name = f"../logs/{timestamp}.log"
+        
+        # Ensure the logs directory exists
+        os.makedirs(os.path.dirname(self._log_file_name), exist_ok=True)
+        
         self.logger = self.setup_logger()
 
     def get_log_to_file(self):
@@ -111,7 +117,7 @@ def test_example_1():
     import logging
     from estrellio_logging_lib import EstrellioLogger
     global logger
-    logger = EstrellioLogger(log_to_file=True, show_plots=True, img_to_file=False, uniform_logging_level=True, desired_level=logging.DEBUG,logger_level=logging.DEBUG,ch_level=logging.INFO,fh_level=logging.DEBUG,log_file_name="logfile.log")
+    logger = EstrellioLogger(log_to_file=True, show_plots=True, img_to_file=False, uniform_logging_level=True, desired_level=logging.DEBUG,logger_level=logging.DEBUG,ch_level=logging.INFO,fh_level=logging.DEBUG)
 
     global show_plots
     global img_to_file
@@ -121,25 +127,31 @@ def test_example_1():
 def main():
     # Example usage in another file
     from estrellio_logging_lib import EstrellioLogger
-    logger = EstrellioLogger(log_to_file=True, show_plots=True, img_to_file=False, uniform_logging_level=True, desired_level=logging.DEBUG,logger_level=logging.DEBUG,ch_level=logging.INFO,fh_level=logging.DEBUG,log_file_name="logfile.log")
-    logger = EstrellioLogger()
+    logger = EstrellioLogger(log_to_file=True, show_plots=True, img_to_file=False, uniform_logging_level=True, desired_level=logging.DEBUG,logger_level=logging.DEBUG,ch_level=logging.INFO,fh_level=logging.DEBUG)
+    #logger = EstrellioLogger()
     global show_plots
     global img_to_file
     show_plots=logger.get_show_plots()
     img_to_file=logger.get_img_to_file()
     logger.set_log_to_file(True)
     logger.set_show_plots(True)
-    logger.log_message('info', 'This is an info message.')
+    logger.log_message('info', 'Program started')
+    
     import matplotlib.pyplot as plt
     if show_plots or img_to_file:
-        data=[1, 2, 3, 4]
-        plot_title='Sample Plot'
+        data = [1, 2, 3, 4]
+        plot_title = 'Sample Plot'
         plt.figure()
         plt.plot(data)
         plt.title(plot_title)
+        
     if show_plots:
         plt.show()
+        
     if img_to_file:
         plt.savefig('plot.png')
+        
+    logger.log_message('info', 'Program ended')
+
 if __name__ == '__main__':
     main()
