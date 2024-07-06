@@ -123,7 +123,25 @@ def test_example_1():
     global img_to_file
     show_plots=logger.get_show_plots()
     img_to_file=logger.get_img_to_file()
+    logger.log_message('info', 'Program started')
 
+    logger.log_message('info', 'Entering main function')
+    
+    variable = 42
+    logger.log_message('debug', f'Variable value: {variable}')
+
+    try:
+        # Simulating a warning scenario
+        if variable > 10:
+            logger.log_message('warning', 'Variable is greater than 10, which may cause issues')
+        
+        # Simulating an error scenario
+        result = 10 / 0
+    except ZeroDivisionError as e:
+        logger.log_message('error', f'An error occurred: {e}')
+    
+    logger.log_message('info', 'Exiting main function')
+    logger.log_message('info', 'Program ended')
 def main():
     # Example usage in another file
     from estrellio_logging_lib import EstrellioLogger
